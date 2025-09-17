@@ -1,4 +1,4 @@
-# EE641 — Homework 2
+# EE641 Homework 1
 
 ## Name: Aditi Surendra Tarate
 ## USC ID: 4251439505
