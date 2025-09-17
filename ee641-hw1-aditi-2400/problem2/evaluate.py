@@ -230,7 +230,6 @@ def run_evaluation(normalize_by='bbox'):
     pck_h = compute_pck(hm_xy_t.to(dev), gt_xy_t.to(dev), PCK_THRESHOLDS, normalize_by=normalize_by)
     pck_r = compute_pck(rg_xy_t.to(dev), gt_xy_t.to(dev), PCK_THRESHOLDS, normalize_by=normalize_by)
 
-    # Plot PCK
     plot_pck_curves(pck_h, pck_r, VIS_DIR / f"pck_{normalize_by}.png")
 
     with open(RESULTS_DIR / f"pck_{normalize_by}.json", "w") as f:
