@@ -14,6 +14,7 @@ Repository Layout:
 
 ```text
 ee641-hw1-aditi-2400/
+├─ report.pdf
 ├─ problem1/
 │  ├─ train.py
 │  ├─ evaluate.py
