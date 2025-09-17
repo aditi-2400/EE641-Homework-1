@@ -11,21 +11,35 @@ Problem 1 – Multi-Scale Single-Shot Detector
 Problem 2 – Keypoint Detection: Heatmap vs Direct Regression
 
 Repository Layout:
+
+```text
 ee641-hw1-aditi-2400/
 ├─ problem1/
-│  ├─ train.py, evaluate.py, model.py, loss.py, utils.py, dataset.py
-│  └─ results/  (created automatically)
+│  ├─ train.py
+│  ├─ evaluate.py
+│  ├─ model.py
+│  ├─ loss.py
+│  ├─ utils.py
+│  ├─ dataset.py
+│  └─ results/                # created automatically
+│
 ├─ problem2/
-│  ├─ train.py, evaluate.py, model.py, baseline.py, dataset.py
-│  └─ results/  (created automatically)
+│  ├─ train.py
+│  ├─ evaluate.py
+│  ├─ model.py
+│  ├─ baseline.py
+│  ├─ dataset.py
+│  └─ results/                # created automatically
+│
 └─ datasets/
    ├─ detection/
-   │  ├─ train/ *.png
-   │  ├─ val/   *.png
+   │  ├─ train/              
+   │  ├─ val/                 
    │  ├─ train_annotations.json
    │  └─ val_annotations.json
+   │
    └─ keypoints/
-      ├─ train/ *.png
-      ├─ val/   *.png
+      ├─ train/               
+      ├─ val/                
       ├─ train_annotations.json
       └─ val_annotations.json
