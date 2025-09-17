@@ -29,7 +29,7 @@ ANCHOR_SCALES = [
 ]
 
 NUM_CLASSES = 3
-NUM_ANCHORS = 3   # per location (matches each list length above)
+NUM_ANCHORS = 3   
 BATCH_SIZE = 16
 LR = 0.001
 MOMENTUM = 0.9
@@ -81,7 +81,6 @@ def train_epoch(model, dataloader, criterion, optimizer, device, anchors_per_lev
             running_loss[k] += loss_dict[f"loss_{k}"].item()
         count += 1
 
-    # Mean per batch
     for k in running_loss:
         running_loss[k] /= max(count, 1)
     return running_loss
@@ -152,14 +151,12 @@ def main():
             scheduler.step()
 
         epoch_time = time.time() - t0
-
-        # Save best by validation total loss
+        
         val_total = val_metrics["tot"]
         if val_total < best_val:
             best_val = val_total
             torch.save(model.state_dict(), BEST_MODEL_PATH)
 
-        # Aggregate and log
         record = {
             "epoch": epoch,
             "time_sec": round(epoch_time, 2),
@@ -170,14 +167,12 @@ def main():
         }
         log.append(record)
 
-        # Print one-liner
         print(f"[{epoch:03d}/{NUM_EPOCHS}] "
               f"train_total={record['train']['tot']:.4f} "
               f"val_total={record['val']['tot']:.4f} "
               f"(obj {record['val']['obj']:.4f} | cls {record['val']['cls']:.4f} | loc {record['val']['loc']:.4f}) "
               f"lr={record['lr']:.5f} time={record['time_sec']}s")
 
-        # Write log each epoch
         with open(LOG_PATH, "w") as f:
             json.dump(log, f, indent=2)
 
