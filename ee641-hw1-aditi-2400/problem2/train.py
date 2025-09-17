@@ -184,7 +184,6 @@ def main():
         device=device, num_epochs=EPOCHS, save_path=REGRESSION_WEIGHTS
     )
 
-    # --- Save combined log ---
     with open(LOG_PATH, "w") as f:
         json.dump(log, f, indent=2)
     print("Saved weights:", HEATMAP_WEIGHTS, REGRESSION_WEIGHTS)
