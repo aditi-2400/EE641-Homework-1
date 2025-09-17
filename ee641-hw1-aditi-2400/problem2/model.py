@@ -52,27 +52,19 @@ class HeatmapNet(nn.Module):
         super().__init__()
         self.num_keypoints = num_keypoints
         
-        # Encoder (downsampling path)
-        # Input: [batch, 1, 128, 128]
-        # Progressively downsample to extract features
-        
-        # Decoder (upsampling path)
-        # Progressively upsample back to heatmap resolution
-        # Output: [batch, num_keypoints, 64, 64]
-        
         # Skip connections between encoder and decoder
         super().__init__()
         self.enc = Encoder()
 
-        self.deconv4 = DeconvBNReLU(256, 128)    # 8->16
+        self.deconv4 = DeconvBNReLU(256, 128)   
         self.dec3 = nn.Sequential(
             ConvBNReLU(256, 128),
             ConvBNReLU(128, 128),
-            DeconvBNReLU(128, 64)                # 16->32
+            DeconvBNReLU(128, 64)                
         )
         self.dec2 = nn.Sequential(
             ConvBNReLU(128, 64),
-            DeconvBNReLU(64, 32)                 # 32->64
+            DeconvBNReLU(64, 32)                 
         )
         self.head = nn.Conv2d(32, num_keypoints, kernel_size=1)
     
@@ -110,10 +102,6 @@ class RegressionNet(nn.Module):
         """
         super().__init__()
         self.num_keypoints = num_keypoints
-        
-        # Use same encoder architecture as HeatmapNet
-        # But add global pooling and fully connected layers
-        # Output: [batch, num_keypoints * 2]
         self.enc = Encoder()
         self.gap = nn.AdaptiveAvgPool2d((1, 1))
         self.mlp = nn.Sequential(
